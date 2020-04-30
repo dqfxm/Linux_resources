@@ -1,0 +1,12 @@
+解决windows10和ubuntu16.04双系统下时间不同步的问题
+更新Ubuntu下的时间：
+
+1.sudo apt-get install ntpdate
+
+2.sudo ntpdate time.windows.com
+
+将时间更新到硬盘中:
+
+3.sudo hwclock --localtime --systohc
+
+重启进入win10，时间恢复正常！
