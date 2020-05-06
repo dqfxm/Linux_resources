@@ -1,0 +1,18 @@
+安装了ubuntu server选择中文之后
+
+之间利用终端操作以后（不是通过crt等软件连接上去的），英文输出都是乱码,出现了一堆方框，
+
+使用export LANGUAGE="zh_CN:cn:zh_US:en"就可以了。
+
+如果想让系统重新启动仍然有效，修改两个文件
+
+    1.sudo vi /var/lib/locales/supported.d/local
+
+      改为：en_US.UTF-8 UTF-8
+
+    2.sudo vi /etc/default/locale
+
+      改为：LANG="en_US.UTF-8"
+            LANGUAGE="en_US:en"
+
+    重启 OK！ 该死的◆不见了 继续操练！
