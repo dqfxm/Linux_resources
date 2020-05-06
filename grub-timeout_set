@@ -1,0 +1,41 @@
+如果你电脑装了多个系统，Ubuntu的GRUB启动菜单会预留10秒的延时让你选择一个系统。如果你没有选择，10秒后会自动进入默认的系统。如果你通常都是进入默认系统，可以把延时缩短，节省开机时间。
+运行下面的命令，在文本编辑器中打开 /etc/default/grub 文件，可以修改启动延时：
+sudo gedit /etc/default/grub
+把GRUB_TIMEOUT的值改为小于10的整数。可以设为最小值1，以后如果你开机时需要选择启动菜单，可以按上下方向键或Esc键。
+保存修改好的文件，运行下面的命令更新启动菜单，才能完成设置：
+sudo update-grub2
+你还可以使用软件Grub-Customizer，能够修改启动菜单的详细设置。
+systemd-analyze blame就是显示开机启动项的时间, 从最慢依次列出。
+
+systemd-analyze blame
+可以看到, 最慢的启动项是NetworkManager-wait-online.service, 竟然用了30秒, 不能忍!
+禁用之:
+sudo systemctl disable NetworkManager-wait-online.service
+systemctl命令，从字面上理解就是「控制系统」，因为 systemctl 是 system 和 ctl 的连写，system 是英语「系统」的意思，ctl 则是 control 的缩写，是英语「控制」的意思。
+用 man systemctl 可以看到它的解释和用法。
+其解释是「Control the systemd system and service manager」，也就是「控制systemd系统和服务管理器」。
+sudo systemctl disable NetworkManager-wait-online.service
+disable 是英语「使失去能力」的意思。
+
+但是，后来的使用中，我又发现一个拖慢系统的启动项，叫 plymouth-quit-wait.service。这次用 disable 却不能将其彻底禁用。
+
+只能用 mask 来禁用，也就是：
+
+sudo systemctl mask plymouth-quit-wait.service
+为什么呢？
+
+因为 mask 这个 systemctl 命令的选项参数是比 disable 更强力的，可以用 man systemctl 来查看。
+
+首先是 disable 的解释：
+mask 选项
+
+看到 mask 选项的解释中有一句英语「This is a stronger version of disable, since it prohibits all kinds of activation of the unit, including enablement and manual activation.」
+
+翻译过来就是：「这是一个增强版本的 disable，因为它阻止了所有激活这个单元的行为，包括启用和手动激活」。
+mask 是英语「掩盖，遮蔽」的意思。
+可以看到执行了上面的 sudo systemctl mask plymouth-quit-wait.service 这句命令后的输出：
+
+Created symlink from /etc/systemd/system/plymouth-quit-wait.service to /dev/null.
+
+也就是说 mask 选项把 plymouth-quit-wait.service 直接软链接到了 /dev/null 这个著名的「黑洞」中去了，然后世界就清净了。
+
