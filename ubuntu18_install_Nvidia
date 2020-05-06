@@ -1,0 +1,47 @@
+弄显卡驱动弄了很久，主要是因为网上的解答良莠不齐且版本并不适合。套路比较深。以下我的解答可能不具有普适性，仅供参考！
+
+本人双显卡，intel集成显卡和GTX860M独立显卡。
+
+1.首先解释一个东西：
+
+查询显卡信息发现GTX860显示3DController，这种渲染方式下，一般显示使用intel集成显卡，3D渲染时使用独立显卡。因此按照网上的一些方法，在终端查询lspci | grep -i vga 只有一张intel集成显卡，如果有双显卡的同学不要以为自己的独立显卡坏了。。查询3d显卡时就可以显示自己的N卡了。
+————————————————
+steven@steven-Lenovo-Y50-70:~$ lspci | grep -i vga
+00:02.0 VGA compatible controller: Intel Corporation 4th Gen Core Processor Integrated Graphics Controller (rev 06)
+steven@steven-Lenovo-Y50-70:~$ lspci | grep -i 3d
+01:00.0 3D controller: NVIDIA Corporation GM107M [GeForce GTX 860M] (rev a2)
+————————————————
+2.显卡驱动配置
+
+网上有些攻略非常非常复杂，又要禁用nouveau驱动，又要进入控制台，又要加载源什么什么的。发现高了半天，网卡驱动还是没装上去，系统重装了好几遍。
+其实很简单，简单来说和把大象放冰箱是一个道理
+在ubuntu18.04刚安装时，双显卡的同学设置->详细信息中显卡默认为Intel集成显卡。
+第一步：（最重要）禁用自己的secure boot，也就是设置为disable，具体的进入自己bios中找一下，一般在security或者boot里面。
+第二步：进入终端输入两条命令
+steven@steven-Lenovo-Y50-70:~$ ubuntu-drivers devices
+
+sudo ubuntu-drivers autoinstall
+解释一下：第一条命令是查看显卡设备和显卡驱动，第二条命令是自动安装合适显卡驱动
+第三步：重新启动吧，然后在应用中找到nvidia setting，如果出现这样的界面，就说明Nvidia显卡驱动安装成功
+~$ nvidia-smi
+出现以下信息说明安装成功！
+Mon Mar 11 19:28:54 2019
+
++-----------------------------------------------------------------------------+
+
+| NVIDIA-SMI 390.116                Driver Version: 390.116                  |
+
+|-------------------------------+----------------------+----------------------+
+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+
+| Fan  Temp  Perf  Pwr:Usage/Cap|        Memory-Usage | GPU-Util  Compute M. |
+
+-----------------------------------------
+如果不能切换显卡，重新安装 nvidia-settings 和 nvidia-prime
+sudo apt-get update
+sudo apt-get install nvidia-settings nvidia-prime
+重启ok！
+
+
+
