@@ -1,0 +1,26 @@
+转载原网站：https://blog.csdn.net/Rookie_tong/article/details/82628301
+一.git操作简介
+先简单介绍一下git常用的三个操作，commit、push、pull。
+1.commit 更新本地仓库信息
+2.push 提交本地信息，更新远程仓库
+3.pull 根据远程仓库更新本地仓库信息
+这是日常版本更迭与管理过程中常用的三个操作。
+二.git账户与本地的关联
+首先保证本地安装了git，git账户与本地主要通过key来实现相互关联。通过输入以下命令生设置git账户信息。
+git config --global user.name "your name"             #设置git账户名
+git config --global user.email "your@email.com"       #设置git账户邮箱
+
+然后输入以下命令，生成SSH key。
+ssh-keygen -t rsa -C "your@email.com"    #生成SSH key
+
+在生成key的过程中，会在本地生成一个.ssh隐藏文件夹，.ssh文件夹下有两个文件，id_rsa与id_rsa.pub，打开第二个文件，内容即是我们所需的key。
+复制粘贴key，打开浏览器登录git账户，在用户的setting下找到SSH and GPG keys选项，点击绿色的New SSH key按钮，在Title框中输入当前key的备注信息，在Key框中粘贴key，确认保存。
+回到本地terminal，输入以下命令：
+ssh -T git@github.com
+即可完成本地和远程git账户的相关联。至此通信建立完成。
+三.vscode使用git管理版本
+vscode自带git管理器，非常方便。首先打开vscode，左侧第三栏即为vscode的git管理器。
+打开从github上clone的工程，以笔者账户下某新建hello-world工程为例。
+在本地修改README.md文件，在git管理器中CHANGES栏目可以看到文件变化信息。之后可以进行commit、push等操作
+
+成功！
