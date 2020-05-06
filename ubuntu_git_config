@@ -22,5 +22,28 @@ ssh -T git@github.com
 vscode自带git管理器，非常方便。首先打开vscode，左侧第三栏即为vscode的git管理器。
 打开从github上clone的工程，以笔者账户下某新建hello-world工程为例。
 在本地修改README.md文件，在git管理器中CHANGES栏目可以看到文件变化信息。之后可以进行commit、push等操作
+四.关联Github项目
+在github的工作仓库找到ssh复制如下
+git remote add origin https://username:password@github.com/zhyuzh3d/goWeb.git，设置Git的远程地址。
+如果搞错了，修改命令是git remote set-url origin https://username:password@github.com/zhyuzh3d/goWeb.git。
+如果搞错了可以用git remote remove origin删除设置,或者手工修改.git/config文件。删除后需要git remote set-url origin https...
+如果要拉取远程项目(从Github复制到本地)，使用命令git pull origin master。
+将修改内容推送到Github
+先推到本地Git，方法是直接在左侧源代码管理面板的输入框输入任意记录，然后ctrl+回车。
+再推送到远程Github,方法是同样从左侧源代码管理面板的菜单-推送到...
 
+因为从远程down下来的是master下的代码，需要先切换到你要开发的分支，也可以新创建dev分支，然后切换到dev分支：
+
+$ git checkout -b dev
+Switched to a new branch 'dev'
+
+同样使用vscode的话点击左下角标注的地方即可切换分支，你所有的改动都会在侧边栏显示，点击后可以看到你的具体改动的地方。这一步相当于git status
+然后你可以点击加号将代码add 到 暂存区(.git目录下的index文件, 暂存区会记录git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体。可以使用git status查看暂存区的状态。暂存区标记了你当前工作区中，哪些内容是被git管理的)。
+再然后点击√将文件添加到本地仓库同时在输入框中输入描述信息，这一步相当于git commit -m 'msg'。
+最后点击左下角你分支名称旁边的按钮，它会实时记录状态,这一步相当于git push
+
+拉去远程仓库代码并merge到自己的分支
+
+首先切换到master分支:点击左下角分支名称。然后点击项目名称旁边的三个小白点拉取项目，这里区别于同步，当然，此时也可以在控制台输入git pull拉取远程仓库最新的代码
+其次切换到自己的分支，然后输入git merge master即可将远程仓库的最新代码同步到自己的分支。
 成功！
