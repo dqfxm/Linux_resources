@@ -42,6 +42,11 @@ Mon Mar 11 19:28:54 2019
 sudo apt-get update
 sudo apt-get install nvidia-settings nvidia-prime
 重启ok！
+查看当前工作的显卡
+~$ prime-select query
+显卡的切换命令，切换后要重启电脑
+~$ prime-select intel
+~$ prime-select nvidia
 
 
 
