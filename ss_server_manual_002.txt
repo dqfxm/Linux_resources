@@ -1,0 +1,33 @@
+一、VPS之V2ray搭建方法：详细教程
+
+使用v2ray的优势/劣势：V2ray是目前比较稳定的使用方式，建议在IP没被封禁的VPS搭建（当然被被禁也可以尝试救活），稳定性不错，但是速度不是很快，能满足基本需要了。我也知道是可以加速，但是建议大家就不要折腾，总比快了被封好很多。
+
+二、Vps之一键脚本libev 版本搭建教程：
+
+原链接：https://www.wervps.com/we/2252.html
+
+推荐系统：centos 7 带BBR版
+搭建方法如下：
+（如出现错误提示 bash: wget: command not found，可以请在先执行命令:
+
+0>> yum -y install wget
+然后再开下下面的命令进行安装
+
+1>> wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
+
+2>> chmod +x shadowsocks-all.sh
+3>> ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log
+运行上面脚本后，直接进入安装界面，整个过程都比较智能化
+
+首先：选择安装版本为SSR 或 SS-libev，建议用ssr
+
+接下来是：端口和SS密码，这个不用多说了
+protocal: auth_sha1_v4
+
+obfs: http_simple
+
+然后是加密方式：选择（aes-256-cfb）,虽说这个是老的加密方式，但是现在可能是比较好的选择，
+
+再然后就是等等脚本执行，提示安装成功。
+
+
