@@ -26,6 +26,13 @@ ssr install
 其他常用命令：
 ssr stop
 ssr help
+
+#如果安了anaconda3，找不到python.出现sudo:python:找不到命令。
+#用下面命令在bin中创建连接
+sudo ln -s ~/anaconda3/bin/python /usr/bin/python
+sudo ln -s ~/anaconda3/bin/pip /usr/bin/pip
+#用which python 查看
+
 然后就可以用 Chrome 的 SwitchyOmega
 AutoProxy：https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 配置终端代理 polipo
