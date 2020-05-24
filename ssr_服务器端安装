@@ -1,4 +1,8 @@
-登录到购买好的Linux服务器（windows可参考 Bitvise连接Linux服务器教程，mac用户请参考 Mac电脑连接Linux教程），在终端（黑框框）里输入如下命令：
+原网站：https://www.hijk.pw/shadowsocksr-ssr-one-click-script/
+登录到购买好的Linux服务器（windows可参考 Bitvise连接Linux服务器教程，mac用户请参考 Mac电脑连接Linux教程），
+
+在终端（黑框框）里输入如下命令：
+
 bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_ssr.sh)
 
 按回车键，屏幕出现“请设置SSR的密码（不输入则随机生成）” 的提示，按照提示设置密码
