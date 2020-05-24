@@ -1,0 +1,29 @@
+登录到购买好的Linux服务器（windows可参考 Bitvise连接Linux服务器教程，mac用户请参考 Mac电脑连接Linux教程），在终端（黑框框）里输入如下命令：
+bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_ssr.sh)
+
+按回车键，屏幕出现“请设置SSR的密码（不输入则随机生成）” 的提示，按照提示设置密码
+（SSR的密码。例如1234abcd，不是买服务器后台的密码）、端口（SSR的端口，例如12345，不能是22和80）并选择加密方式。
+
+接下来屏幕上开始疯狂出现一堆你看得懂也可能看不懂的东西，如果安装过程中卡住，请耐心等待几分钟；
+期间网络断开（windows上表现为黑框框中或者顶部标题出现disconnected字样，mac表现为终端出现
+“closed by remote host”或”broken pipe”），请重新连接后再次执行命令。脚本执行成功后会输出SSR配置，界面如下：
+到此服务端配置完毕，服务器可能会自动重启(没提示重启则不需要)，windows终端出现“disconnected”，
+mac出现“closed by remote host”说明服务器重启了。
+
+SSR一键脚本做了如下事情：
+
+    更新系统到最新版
+    安装bbr加速模块
+    安装SSR并设置开机启动
+ 
+其他
+
+1. 查看ssr运行状态/配置：bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_ssr.sh) info
+
+2. SSR管理命令：启动：systemctl start shadowsocksR；停止：systemctl stop shadowsocksR；重启：systemctl restart shadowsocksR；
+
+3. 更改密码、端口、混淆参数的最简单方法：重新运行一次安装脚本;
+
+4. 卸载SSR：bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_ssr.sh) uninstall。
+
+如果运行过程中遇到问题，请随时在页面留言。
